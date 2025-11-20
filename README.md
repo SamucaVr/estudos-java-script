@@ -10,7 +10,7 @@ Este repositório contém uma coleção de arquivos e exemplos utilizados para e
 
 1. Clone o repositório para o seu ambiente local utilizando o comando:
    ```bash
-   git clone https://github.com/seu-usuario/nome-do-repositorio.git
+   git clone https://github.com/SamucaVr/estudos-java-script.git
 
 2. Navegue pelas pastas correspondentes aos diferentes conceitos e tópicos de JavaScript que deseja estudar.
 
