@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Tabuada - JS</title>
+    </head>
+    <body>
+        <div id="campoNumero">
+            <input type="number" id="numeroInformado">
+            <button id="calcular">Calcular</button>
+        </div>
+        <div id="resultado"></div>
+    </body>
+
+    <script>
+        const resultado = document.getElementById('resultado');
+        const numeroInformado = document.getElementById('numeroInformado');
+        const botaoCalcular = document.getElementById('calcular');
+        let listaNumeros = [];
+
+        botaoCalcular.addEventListener('click', () => {
+            if (resultado.children.length > 0) { // // Verifica se já existe alguma tabuada exibida na tela
+                const mensagemLimpeza = window.confirm('Deseja limpar o campo para realizar outra operação?')
+                
+                if (mensagemLimpeza) {
+                    resultado.innerHTML = '';
+                    numeroInformado.value = '';
+                    return;
+                } else {
+                    return;
+                }
+            }
+
+            listaNumeros = tabuada(Number(numeroInformado.value));
+            console.log(listaNumeros);
+
+            if (isNaN(Number(numeroInformado.value)) || numeroInformado.value.trim() === '' || numeroInformado.value <= 0) {
+                window.alert('Informe um valor!');
+                numeroInformado.value = '';
+
+                return;
+            }
+
+            let campoNotas;
+            
+            for (let i = 0; i < 10; i++) {
+                campoNotas = document.createElement('p');
+                campoNotas.classList.add('teste');
+                campoNotas.textContent = `${numeroInformado.value} * ${i + 1} = ${listaNumeros[i]}`;
+                resultado.appendChild(campoNotas);
+            }
+
+        });
+
+        const tabuada = (numero) => {
+            const listaNumeros = [];
+            for (let i = 1; i <= 10; i++) {
+                listaNumeros.push(numero * i);
+            }
+
+            return listaNumeros;
+        }
+    </script>
+</html>
