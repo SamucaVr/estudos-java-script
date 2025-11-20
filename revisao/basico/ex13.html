@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Media de notas</title>
+    </head>
+    <body>
+        <label for="quantidadeNotas">Informe a quantidade de notas:</label>
+        <input type="number" id="quantidadeNotas" placeholder="Máximo: 5 notas">
+        <button id="botaoCriar">Enviar</button>
+        <div id="area"></div>
+        <p id="resultado"></p>
+
+    </body>
+
+    <script>
+        const botaoCriar = document.getElementById('botaoCriar');
+        const botaoNotas = document.getElementById('enviarNotas');
+        const quantidadeNotas = document.getElementById('quantidadeNotas');
+        const area = document.getElementById('area');
+        const resultado = document.getElementById('resultado');
+        
+        botaoCriar.addEventListener('click', () => {
+            const quantidadeConvertida = Number(quantidadeNotas.value);
+
+            if (isNaN(quantidadeConvertida) || quantidadeConvertida > 5 || quantidadeConvertida <= 0) {
+                window.alert('Informe uma quantidade válida!');
+                return;
+            }
+
+            window.alert('Insira as notas:');
+
+            area.innerHTML = '';
+            let id = 0;
+
+            // criando os inputs
+            while (id < quantidadeConvertida) {
+                const novoInput = document.createElement('input');
+                novoInput.type = 'number';
+                novoInput.classList.add('input');
+    
+                area.appendChild(novoInput);
+                id++;
+            }
+            
+            const botaoEnviar = document.createElement('button');
+            botaoEnviar.id = 'enviarNotas';
+            botaoEnviar.textContent = 'Calcular média';
+            area.appendChild(botaoEnviar);
+
+            botaoEnviar.addEventListener('click', () => {
+                const campos = document.querySelectorAll('.input');
+
+                let soma = 0;
+                for (let i = 0; i < campos.length; i++) {
+                    soma += Number(campos[i].value);
+                }
+                console.log(soma);
+                let media = soma / campos.length;
+
+                resultado.textContent = `Essa é a média das notas: ${media.toFixed(2)}`;
+            });
+        });
+
+
+    </script>
+</html>
