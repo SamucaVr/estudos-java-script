@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calcular média 2</title>
+        <style>
+            #campo-notas     {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                height: 97vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="campo-notas">
+            <label for="notas" id="label"></label>
+            <input type="number" id="notas">
+            <button id="calcularMedia">Calcular média</button>
+            <p id="resultado"></p>
+        </div>
+    </body>
+
+    <script>
+        const notas = document.getElementById('notas');
+        const label = document.getElementById('label');
+        const calcularMedia = document.getElementById('calcularMedia');
+        const campoResultado = document.getElementById('resultado');
+        const listaNotas = [];
+        let contador = 1;
+
+        label.textContent = `Informe a ${contador}ª nota:`;
+
+        calcularMedia.addEventListener('click', () => {  
+            if (isNaN(Number(notas.value)) || notas.value.trim() === '') {
+                campoResultado.style.color = '#f00';
+                campoResultado.textContent = 'Informe um valor!';
+
+                contador--;
+            } else {
+                listaNotas.push(Number(notas.value));
+            }
+
+            if (contador === 3) {
+                campoResultado.style.color = '#00ff5f';
+                campoResultado.textContent = `Essa é a média das notas: ${calculoDaMedia(listaNotas).toFixed(2)}`;
+                contador--;
+            
+                calcularMedia.disabled = true;
+            }
+
+            limparCampo();
+            contador++;
+
+            label.textContent = `Informe a ${contador}ª nota:`;
+        });
+
+        const calculoDaMedia = (arrayNotas) => {
+            let soma = 0;
+
+            if (arrayNotas.length === 3) {
+                for (let i = 0; i < arrayNotas.length; i++) {
+                    soma += arrayNotas[i];
+                }
+
+                const media = soma / arrayNotas.length;
+                return media;
+            }
+            return 0;
+        }
+
+        const limparCampo = () => {
+            notas.value = '';
+        }
+
+    </script>
+</html>
